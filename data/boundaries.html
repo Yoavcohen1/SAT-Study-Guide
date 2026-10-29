@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAT Boundaries</title>
+  <style>
+    :root{
+      --bg:#ffffff;--ink:#172033;--muted:#5d6878;--line:#dce4ec;--soft:#f7fafc;
+      --blue:#1f74a8;--cyan:#0789ad;--red:#cf4a46;--green:#16834f;
+      --shadow:0 14px 34px rgba(16,24,40,.07);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Segoe UI,Arial,sans-serif;line-height:1.65}
+    .wrap{max-width:1040px;margin:0 auto;padding:36px 28px 90px}
+    .hero{text-align:center;margin:4px auto 34px}
+    .kicker{margin:0 0 7px;color:var(--muted);font-weight:850;letter-spacing:.08em;text-transform:uppercase;font-size:.78rem}
+    h1{margin:0;font-size:clamp(2.35rem,5vw,4.25rem);line-height:1.04;letter-spacing:-.05em;font-weight:950}
+    .title-rule{width:96px;height:4px;border-radius:999px;background:linear-gradient(90deg,#7cc7df,#9fd6c1);margin:18px auto 0}
+    .intro{max-width:760px;margin:18px auto 0;color:#344054;font-size:1.08rem;font-weight:560}
+    .section-title{margin:46px 0 20px;font-size:clamp(1.75rem,3.5vw,2.55rem);line-height:1.12;letter-spacing:-.035em;font-weight:950;text-align:center}
+    .lead{max-width:760px;margin:0 auto 22px;text-align:center;color:#344054;font-size:1.02rem}
+
+    .strategy{max-width:900px;margin:0 auto 36px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .strategy-row{display:grid;grid-template-columns:240px 1fr;align-items:center;min-height:76px;border-bottom:1px solid var(--line)}
+    .strategy-row:last-child{border-bottom:0}
+    .strategy-word{padding:18px 26px;border-right:1px solid var(--line);font-size:1.6rem;line-height:1.1;font-weight:950;letter-spacing:-.035em}
+    .strategy-word small{display:block;font-size:.78rem;font-weight:750;color:var(--muted);letter-spacing:0;margin-top:3px}
+    .strategy-action{padding:18px 26px;font-size:1.15rem;font-weight:720}
+    .blue{color:#4d93c4;font-weight:900}.cyan{color:#0789ad;font-weight:900}.red{color:var(--red);font-weight:900}
+
+    .plist{counter-reset:p;max-width:760px;margin:6px auto 0;padding:0;list-style:none}
+    .plist li{position:relative;display:flex;gap:16px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--line)}
+    .plist li:last-child{border-bottom:0}
+    .plist li:before{counter-increment:p;content:counter(p);flex:0 0 auto;width:36px;height:36px;border-radius:10px;background:#eef6fb;color:var(--blue);display:grid;place-items:center;font-weight:950;font-size:1.05rem}
+    .plist b{font-size:1.12rem;font-weight:850}
+    .plist span{display:block;color:#5d6878;font-weight:600;font-size:.95rem;margin-top:1px}
+
+    .process{max-width:820px;margin:6px auto 0;padding:0;list-style:none;counter-reset:s}
+    .process li{position:relative;padding:11px 0 11px 42px;border-bottom:1px dashed #e3e9ef;color:#27384e;font-weight:600}
+    .process li:last-child{border-bottom:0}
+    .process li:before{counter-increment:s;content:counter(s);position:absolute;left:0;top:9px;width:28px;height:28px;border-radius:50%;border:2px solid #9ed0df;color:var(--blue);display:grid;place-items:center;font-weight:850;font-size:.9rem}
+    .process b{color:#172033}
+
+    .table-wrap{margin:22px auto 48px;max-width:980px;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
+    table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:.95rem;line-height:1.4}
+    th{background:#172033;color:#fff;text-align:left;padding:14px 16px;font-size:.9rem}
+    td{border-top:1px solid var(--line);border-right:1px solid var(--line);padding:14px 16px;vertical-align:top}
+    td:last-child,th:last-child{border-right:0}
+    tbody tr:nth-child(even){background:#fbfdff}
+    .type{background:#fff7f2;font-weight:850;color:#172033}
+    .type span{display:block;color:#5d6878;font-weight:560;margin-top:2px;font-size:.86rem}
+    .rule{font-weight:650;color:#27384e}
+    .rule em{color:var(--blue);font-style:normal;font-weight:850}
+    .ex{color:#344054;font-family:Georgia,Times New Roman,serif}
+
+    .paper{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px 28px;box-shadow:var(--shadow);margin:24px auto;max-width:920px;font-family:Georgia,Times New Roman,serif;color:#101828;font-size:1.05rem;line-height:1.62}
+    .blank{display:inline-block;min-width:90px;border-bottom:2px solid #172033;transform:translateY(-2px)}
+    .question{margin-top:20px;font-family:Inter,Segoe UI,Arial,sans-serif}
+    .answer-list{margin-top:18px;font-family:Inter,Segoe UI,Arial,sans-serif;font-size:1rem}
+    .answer{padding:13px 0;border-bottom:1px solid #edf1f5;color:#101828;font-weight:400}
+    .answer.correct{color:#101828;font-weight:400;background:transparent}
+    .circle-letter{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border:2px solid #168fd0;border-radius:50%;margin-right:8px;font-weight:700;color:#101828;font-family:Inter,Segoe UI,Arial,sans-serif}
+    .correct-text{font-weight:400;color:#101828}
+    .note{display:inline-block;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--red);font-weight:750;margin-left:10px;font-size:.92rem}
+
+    .think{max-width:920px;margin:28px auto 42px}
+    .think h2{margin:0 0 12px;font-size:1.55rem;letter-spacing:-.025em}
+    .think-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .think-box{border-left:4px solid #9ed0df;background:var(--soft);padding:16px 18px;border-radius:0 12px 12px 0}
+    .think-box h3{margin:0 0 6px;font-size:1.05rem}
+    .think-box p{margin:0;color:#344054}
+
+    @media(max-width:900px){
+      .strategy-row{grid-template-columns:1fr}
+      .strategy-word{border-right:0;border-bottom:1px solid var(--line);padding:14px 18px}
+      .strategy-action{padding:14px 18px}
+      .think-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:700px){.wrap{padding:26px 18px 70px}.paper{padding:20px}.table-wrap{overflow-x:auto}table{min-width:720px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <p class="kicker">Standard English Conventions</p>
+      <h1>Boundaries</h1>
+      <div class="title-rule"></div>
+      <p class="intro">Boundaries questions test how to punctuate between sentences and clauses. Find where one complete idea ends and the next begins, then choose the punctuation that fits.</p>
+    </header>
+
+    <h2 class="section-title">Priority List</h2>
+    <p class="lead">When more than one choice seems possible, work through the options in this order.</p>
+    <ol class="plist">
+      <li><div><b>Colon</b><span>Use it first when an independent clause sets up an expanding thought.</span></div></li>
+      <li><div><b>Period, Semicolon, Comma + FANBOYS</b><span>The three ways to join two independent clauses.</span></div></li>
+      <li><div><b>Isolated Comma</b><span>For a list or to attach a non-essential element.</span></div></li>
+      <li><div><b>No punctuation</b><span>When nothing belongs between the words.</span></div></li>
+    </ol>
+
+    <h2 class="section-title">Punctuation Process</h2>
+    <ol class="process">
+      <li><b>Look at the answer choices first.</b></li>
+      <li><b>Plan out all your steps</b> just from the answer choices.</li>
+      <li><b>Find what you need to look for</b> in the passage.</li>
+      <li><b>Look for that</b> in the passage.</li>
+      <li><b>Look for the subject and the main verb.</b></li>
+      <li><b>Comma jumping:</b> start at the beginning of the sentence and stop at the next comma — that is where the inserted phrase ends.</li>
+      <li><b>Make sure you fully understand the structure</b> of the sentence before you select the answer.</li>
+    </ol>
+
+    <h2 class="section-title">All Punctuations</h2>
+    <div class="table-wrap">
+      <table aria-label="All punctuation rules and examples">
+        <thead><tr><th style="width:24%">Punctuation</th><th style="width:40%">When to use it</th><th style="width:36%">Example</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="type">Colon<span>1 thing</span></td>
+            <td class="rule">Independent clause before, and an <em>expanding thought</em> after (a list or explanation).</td>
+            <td class="ex">They had one goal: safety.</td>
+          </tr>
+          <tr>
+            <td class="type">Period<span>1 thing</span></td>
+            <td class="rule">Independent clause before <em>and</em> independent clause after.</td>
+            <td class="ex">The bridge was old. Engineers replaced it.</td>
+          </tr>
+          <tr>
+            <td class="type">Semicolon<span>2 things</span></td>
+            <td class="rule">1. A semicolon <em>list</em> (separates items that already contain commas).<br>2. Independent clause before and independent clause after.</td>
+            <td class="ex">We visited Paris, France; Rome, Italy; and Bern, Switzerland.<br><br>The bridge was old; engineers replaced it.</td>
+          </tr>
+          <tr>
+            <td class="type">Comma + FANBOYS<span>1 thing</span></td>
+            <td class="rule">Independent clause before and independent clause after, joined by <em>for, and, nor, but, or, yet, so</em>.</td>
+            <td class="ex">The bridge was old, so engineers replaced it.</td>
+          </tr>
+          <tr>
+            <td class="type">Isolated Comma<span>2 things</span></td>
+            <td class="rule">1. A comma <em>list</em>.<br>2. Attaches a <em>non-essential element</em>.</td>
+            <td class="ex">We bought apples, pears, and figs.<br><br>The bridge, built in 1910, was replaced.</td>
+          </tr>
+          <tr>
+            <td class="type">Dash<span>2 things</span></td>
+            <td class="rule">1. Attaches a <em>non-essential element</em> (must be a dash sandwich — a matching pair).<br>2. Same thing as a colon.</td>
+            <td class="ex">The bridge — built in 1910 — was replaced.<br><br>They had one goal — safety.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="section-title">Practice Example</h2>
+    <section class="paper">
+      <p>The Mariana Trench is the deepest part of the ocean<span class="blank"></span> scientists have only begun to explore its strange ecosystems. <span class="note">two complete sentences</span></p>
+      <p class="question"><b>Question:</b> Which choice completes the text so that it conforms to the conventions of Standard English?</p>
+      <div class="answer-list">
+        <div class="answer">A. ocean, scientists</div>
+        <div class="answer">B. ocean scientists</div>
+        <div class="answer correct"><span class="circle-letter">C</span><span class="correct-text">ocean. Scientists</span></div>
+        <div class="answer">D. ocean: scientists</div>
+      </div>
+    </section>
+
+    <section class="think">
+      <h2>How to avoid traps</h2>
+      <div class="think-grid">
+        <div class="think-box"><h3>Two complete sentences</h3><p>You may not join them with a comma alone — that is a comma splice. Use a period, semicolon, or comma + FANBOYS.</p></div>
+        <div class="think-box"><h3>Colon test</h3><p>The words before a colon must form a complete sentence that sets up what follows.</p></div>
+        <div class="think-box"><h3>Dash sandwich</h3><p>A dash that sets off extra information needs a matching dash on the other side.</p></div>
+        <div class="think-box"><h3>Subject and verb</h3><p>Find them first — they tell you where each complete idea begins and ends.</p></div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

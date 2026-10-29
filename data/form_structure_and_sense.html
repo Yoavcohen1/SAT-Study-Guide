@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAT Form, Structure and Sense</title>
+  <style>
+    :root{
+      --bg:#ffffff;--ink:#172033;--muted:#5d6878;--line:#dce4ec;--soft:#f7fafc;
+      --blue:#1f74a8;--cyan:#0789ad;--red:#cf4a46;--green:#16834f;
+      --shadow:0 14px 34px rgba(16,24,40,.07);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Segoe UI,Arial,sans-serif;line-height:1.65}
+    .wrap{max-width:1040px;margin:0 auto;padding:36px 28px 90px}
+    .hero{text-align:center;margin:4px auto 34px}
+    .kicker{margin:0 0 7px;color:var(--muted);font-weight:850;letter-spacing:.08em;text-transform:uppercase;font-size:.78rem}
+    h1{margin:0;font-size:clamp(2.2rem,5vw,3.9rem);line-height:1.04;letter-spacing:-.05em;font-weight:950}
+    .title-rule{width:96px;height:4px;border-radius:999px;background:linear-gradient(90deg,#7cc7df,#9fd6c1);margin:18px auto 0}
+    .intro{max-width:760px;margin:18px auto 0;color:#344054;font-size:1.08rem;font-weight:560}
+    .section-title{margin:46px 0 20px;font-size:clamp(1.75rem,3.5vw,2.55rem);line-height:1.12;letter-spacing:-.035em;font-weight:950;text-align:center}
+    .lead{max-width:760px;margin:0 auto 22px;text-align:center;color:#344054;font-size:1.02rem}
+
+    .quick-guide{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;max-width:980px;margin:30px auto 46px}
+    .guide-item{border-top:3px solid #9ed0df;padding-top:13px}
+    .guide-item h3{margin:0 0 7px;font-size:1.08rem;line-height:1.2;font-weight:950;letter-spacing:-.015em}
+    .guide-item p{margin:0;color:#344054;font-size:.98rem}
+
+    .table-wrap{margin:22px auto 30px;max-width:900px;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
+    table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:.96rem;line-height:1.4}
+    th{background:#172033;color:#fff;text-align:left;padding:14px 16px;font-size:.9rem}
+    td{border-top:1px solid var(--line);border-right:1px solid var(--line);padding:13px 16px;vertical-align:top}
+    td:last-child,th:last-child{border-right:0}
+    tbody tr:nth-child(even){background:#fbfdff}
+    .type{background:#f1f8fb;font-weight:850;color:#172033}
+    .cell{color:#27384e}
+
+    .callout{max-width:900px;margin:8px auto 0;padding:14px 18px;border-left:4px solid var(--blue);background:var(--soft);color:#27384e;font-weight:650;border-radius:0 12px 12px 0}
+    .callout b{color:#172033}
+    .callout i{color:#101828}
+
+    .paper{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px 28px;box-shadow:var(--shadow);margin:24px auto;max-width:920px;font-family:Georgia,Times New Roman,serif;color:#101828;font-size:1.05rem;line-height:1.62}
+    .hl-blue{border-bottom:3px solid #7cc7df;font-weight:650}
+    .blank{display:inline-block;min-width:90px;border-bottom:2px solid #172033;transform:translateY(-2px)}
+    .question{margin-top:20px;font-family:Inter,Segoe UI,Arial,sans-serif}
+    .answer-list{margin-top:18px;font-family:Inter,Segoe UI,Arial,sans-serif;font-size:1rem}
+    .answer{padding:13px 0;border-bottom:1px solid #edf1f5;color:#101828;font-weight:400}
+    .answer.correct{color:#101828;font-weight:400;background:transparent}
+    .circle-letter{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border:2px solid #168fd0;border-radius:50%;margin-right:8px;font-weight:700;color:#101828;font-family:Inter,Segoe UI,Arial,sans-serif}
+    .correct-text{font-weight:400;color:#101828}
+    .note{display:inline-block;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--red);font-weight:750;margin-left:10px;font-size:.92rem}
+
+    .think{max-width:920px;margin:28px auto 42px}
+    .think h2{margin:0 0 12px;font-size:1.55rem;letter-spacing:-.025em}
+    .think-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .think-box{border-left:4px solid #9ed0df;background:var(--soft);padding:16px 18px;border-radius:0 12px 12px 0}
+    .think-box h3{margin:0 0 6px;font-size:1.05rem}
+    .think-box p{margin:0;color:#344054}
+
+    @media(max-width:900px){.quick-guide{grid-template-columns:1fr 1fr}.think-grid{grid-template-columns:1fr}}
+    @media(max-width:700px){.wrap{padding:26px 18px 70px}.paper{padding:20px}.quick-guide{grid-template-columns:1fr}.table-wrap{overflow-x:auto}table{min-width:600px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <p class="kicker">Standard English Conventions</p>
+      <h1>Form, Structure and Sense</h1>
+      <div class="title-rule"></div>
+      <p class="intro">These grammar questions test four must-know patterns: verbs, pronouns, modifiers, and apostrophes. Learn the rules below and you will recognize them instantly.</p>
+    </header>
+
+    <h2 class="section-title">The Four Patterns</h2>
+    <section class="quick-guide">
+      <div class="guide-item"><h3>Verbs</h3><p>Match the verb to its real subject; ignore words in between.</p></div>
+      <div class="guide-item"><h3>Pronouns</h3><p>Find the antecedent, then match number and case.</p></div>
+      <div class="guide-item"><h3>Modifiers</h3><p>The word right after the comma must be what the phrase describes.</p></div>
+      <div class="guide-item"><h3>Apostrophes</h3><p>Possession or contraction — never just a plural.</p></div>
+    </section>
+
+    <h2 class="section-title">Pronoun Chart</h2>
+    <div class="table-wrap">
+      <table aria-label="Pronoun chart">
+        <thead><tr><th style="width:26%">Type</th><th style="width:37%">Singular</th><th style="width:37%">Plural</th></tr></thead>
+        <tbody>
+          <tr><td class="type">Subject</td><td class="cell">I, you, he, she, it</td><td class="cell">we, you, they</td></tr>
+          <tr><td class="type">Object</td><td class="cell">me, you, him, her, it</td><td class="cell">us, you, them</td></tr>
+          <tr><td class="type">Possessive (adj.)</td><td class="cell">my, your, his, her, its</td><td class="cell">our, your, their</td></tr>
+          <tr><td class="type">Possessive (noun)</td><td class="cell">mine, yours, his, hers, its</td><td class="cell">ours, yours, theirs</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout"><b>2-step pronoun process:</b> ① Find the antecedent (the noun the pronoun replaces). ② Match the pronoun to it. <br><i>Arcata is one of the coolest places in California. However, many people don't even know <b>it</b> exists.</i> — "it" stands for the singular "Arcata."</div>
+
+    <h2 class="section-title">Verb Agreement</h2>
+    <section class="paper">
+      <p>Her exhaustive chromosomal <span class="hl-blue">survey</span> of plants in Silent Valley, a tropical forest home to nearly 1,000 species of native flora (many of which are endangered), <span class="blank"></span> instrumental in the government's decision to preserve the forest. <span class="note">subject = survey (singular)</span></p>
+      <p class="question"><b>Question:</b> Which choice conforms to the conventions of Standard English?</p>
+      <div class="answer-list">
+        <div class="answer">A. are</div>
+        <div class="answer">B. were</div>
+        <div class="answer">C. have been</div>
+        <div class="answer correct"><span class="circle-letter">D</span><span class="correct-text">was</span></div>
+      </div>
+    </section>
+    <div class="callout">Cross out the long phrase between the subject and the verb. The subject is the singular noun <b>survey</b>, so it takes the singular verb <b>was</b>.</div>
+
+    <h2 class="section-title">Modifiers</h2>
+    <p class="lead">The rule: whatever is described before the comma must come right after the comma.</p>
+    <section class="paper">
+      <p>Far from being modern inventions,<span class="blank"></span> more than 5,000 years ago. <span class="note">what isn't modern? the straws</span></p>
+      <p class="question"><b>Question:</b> Which choice conforms to the conventions of Standard English?</p>
+      <div class="answer-list">
+        <div class="answer">A. Sumerians in ancient Mesopotamia used drinking straws</div>
+        <div class="answer correct"><span class="circle-letter">B</span><span class="correct-text">drinking straws were used by Sumerians in ancient Mesopotamia</span></div>
+        <div class="answer">C. the use of drinking straws by Sumerians happened</div>
+        <div class="answer">D. ancient Mesopotamia was home to Sumerians who used drinking straws</div>
+      </div>
+    </section>
+
+    <h2 class="section-title">Apostrophes</h2>
+    <p class="lead">Apostrophes show possession (the Moon's pull) or form contractions (it's = it is). A plain plural takes no apostrophe.</p>
+    <section class="paper">
+      <p>Earth is not a perfect sphere. Due to the<span class="blank"></span> gravitational pull, Earth bulges out on the sides closest to and farthest from the Moon. <span class="note">one Moon, owns the pull</span></p>
+      <p class="question"><b>Question:</b> Which choice conforms to the conventions of Standard English?</p>
+      <div class="answer-list">
+        <div class="answer correct"><span class="circle-letter">A</span><span class="correct-text">Moon's</span></div>
+        <div class="answer">B. Moons</div>
+        <div class="answer">C. Moons'</div>
+        <div class="answer">D. Moon</div>
+      </div>
+    </section>
+
+    <section class="think">
+      <h2>Confusables the SAT loves</h2>
+      <div class="think-grid">
+        <div class="think-box"><h3>its vs it's</h3><p><b>its</b> = belonging to it; <b>it's</b> = it is.</p></div>
+        <div class="think-box"><h3>there / their / they're</h3><p>place; possession; they are.</p></div>
+        <div class="think-box"><h3>who's vs whose</h3><p><b>who's</b> = who is; <b>whose</b> = possession.</p></div>
+        <div class="think-box"><h3>singular vs plural verb</h3><p>Cross out phrases between the subject and verb, then check agreement.</p></div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

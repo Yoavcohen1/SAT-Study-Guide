@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAT Inferences</title>
+  <style>
+    :root{
+      --bg:#ffffff;
+      --ink:#172033;
+      --muted:#5d6878;
+      --line:#dce4ec;
+      --soft:#f7fafc;
+      --blue:#1f74a8;
+      --cyan:#0789ad;
+      --red:#cf3636;
+      --green:#16834f;
+      --shadow:0 14px 34px rgba(16,24,40,.07);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family:Inter,Segoe UI,Arial,sans-serif;
+      line-height:1.65;
+    }
+    .wrap{
+      max-width:1040px;
+      margin:0 auto;
+      padding:36px 28px 90px;
+    }
+    .hero{
+      text-align:center;
+      margin:4px auto 34px;
+    }
+    .kicker{
+      margin:0 0 7px;
+      color:var(--muted);
+      font-weight:850;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size:.78rem;
+    }
+    h1{
+      margin:0;
+      font-size:clamp(2.35rem,5vw,4.25rem);
+      line-height:1.04;
+      letter-spacing:-.05em;
+      font-weight:950;
+    }
+    .title-rule{
+      width:96px;
+      height:4px;
+      border-radius:999px;
+      background:linear-gradient(90deg,#7cc7df,#9fd6c1);
+      margin:18px auto 0;
+    }
+    .intro{
+      max-width:760px;
+      margin:18px auto 0;
+      color:#344054;
+      font-size:1.08rem;
+      font-weight:560;
+    }
+    .section-title{
+      margin:46px 0 20px;
+      font-size:clamp(1.75rem,3.5vw,2.55rem);
+      line-height:1.12;
+      letter-spacing:-.035em;
+      font-weight:950;
+      text-align:center;
+    }
+
+    .strategy{
+      max-width:900px;
+      margin:0 auto 36px;
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      background:#fff;
+    }
+    .strategy-row{
+      display:grid;
+      grid-template-columns:260px 1fr;
+      align-items:center;
+      min-height:76px;
+      border-bottom:1px solid var(--line);
+    }
+    .strategy-row:last-child{border-bottom:0}
+    .strategy-word{
+      padding:18px 26px;
+      border-right:1px solid var(--line);
+      font-size:1.62rem;
+      line-height:1.1;
+      font-weight:950;
+      letter-spacing:-.035em;
+    }
+    .strategy-action{
+      padding:18px 26px;
+      font-size:1.18rem;
+      font-weight:720;
+    }
+    .blue{color:#4d93c4;font-weight:900}
+    .red{color:#e13232;font-weight:900}
+    .green{color:#16834f;font-weight:900}
+
+    .quick-guide{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:18px;
+      max-width:980px;
+      margin:30px auto 46px;
+    }
+    .guide-item{
+      border-top:3px solid #9ed0df;
+      padding-top:13px;
+    }
+    .guide-item h3{
+      margin:0 0 7px;
+      font-size:1.08rem;
+      line-height:1.2;
+      font-weight:950;
+      letter-spacing:-.015em;
+    }
+    .guide-item p{
+      margin:0;
+      color:#344054;
+      font-size:.98rem;
+    }
+
+    .paper{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:24px 28px;
+      box-shadow:var(--shadow);
+      margin:24px auto;
+      max-width:920px;
+      font-family:Georgia,Times New Roman,serif;
+      color:#101828;
+      font-size:1.05rem;
+      line-height:1.62;
+    }
+    .paper h3{
+      margin:0 0 10px;
+      font-family:Inter,Segoe UI,Arial,sans-serif;
+      font-size:1rem;
+      color:#172033;
+      letter-spacing:.02em;
+    }
+    .question{
+      margin-top:20px;
+      font-family:Inter,Segoe UI,Arial,sans-serif;
+    }
+    .answer-list{
+      margin-top:18px;
+      font-family:Inter,Segoe UI,Arial,sans-serif;
+      font-size:1rem;
+    }
+    .answer{
+      padding:13px 0;
+      border-bottom:1px solid #edf1f5;
+      color:#101828;
+      font-weight:400;
+    }
+    .answer.correct{
+      color:#101828;
+      font-weight:400;
+      background:transparent;
+    }
+    .circle-letter{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:28px;
+      height:28px;
+      border:2px solid #168fd0;
+      border-radius:50%;
+      margin-right:8px;
+      font-weight:700;
+      color:#101828;
+      font-family:Inter,Segoe UI,Arial,sans-serif;
+    }
+    .correct-text{
+      font-weight:400;
+      color:#101828;
+    }
+    .hl-blue{
+      border-bottom:3px solid #7cc7df;
+      font-weight:650;
+    }
+    .hl-purple{
+      border-bottom:3px solid #c998e9;
+      font-weight:650;
+    }
+    .note{
+      display:inline-block;
+      font-family:Inter,Segoe UI,Arial,sans-serif;
+      color:var(--red);
+      font-weight:750;
+      margin-left:12px;
+    }
+
+    .process{
+      max-width:920px;
+      margin:34px auto 46px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
+    .process-box{
+      background:var(--soft);
+      border-left:4px solid #9ed0df;
+      border-radius:0 12px 12px 0;
+      padding:17px 18px;
+    }
+    .process-box h3{
+      margin:0 0 6px;
+      font-size:1.08rem;
+      font-weight:950;
+    }
+    .process-box p{
+      margin:0;
+      color:#344054;
+    }
+    .trap-list{
+      max-width:920px;
+      margin:28px auto 42px;
+      padding:0;
+    }
+    .trap-list h2{
+      margin:0 0 12px;
+      font-size:1.55rem;
+      letter-spacing:-.025em;
+    }
+    .trap-list ul{
+      margin:0;
+      padding-left:20px;
+      color:#344054;
+    }
+    .trap-list li{margin:8px 0}
+
+    @media(max-width:900px){
+      .quick-guide,.process{grid-template-columns:1fr 1fr}
+      .strategy-row{grid-template-columns:1fr}
+      .strategy-word{border-right:0;border-bottom:1px solid var(--line);padding:14px 18px}
+      .strategy-action{padding:14px 18px}
+    }
+    @media(max-width:700px){
+      .wrap{padding:26px 18px 70px}
+      .quick-guide,.process{grid-template-columns:1fr}
+      .paper{padding:20px}
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <p class="kicker">Information and Ideas</p>
+      <h1>Inferences</h1>
+      <div class="title-rule"></div>
+      <p class="intro">Inference questions ask you to choose what must be true based on the text. The answer is not always stated directly, but it must be supported by the passage.</p>
+    </header>
+
+    <h2 class="section-title">LAMP Strategy</h2>
+
+    <section class="strategy" aria-label="LAMP strategy">
+      <div class="strategy-row">
+        <div class="strategy-word">Last Sentence</div>
+        <div class="strategy-action">Start with the <span class="blue">last sentence</span>.</div>
+      </div>
+      <div class="strategy-row">
+        <div class="strategy-word">Assess</div>
+        <div class="strategy-action">Look back to get <span class="blue">context</span>.</div>
+      </div>
+      <div class="strategy-row">
+        <div class="strategy-word">Make a prediction</div>
+        <div class="strategy-action"><span class="blue">Predict</span> the missing idea.</div>
+      </div>
+      <div class="strategy-row">
+        <div class="strategy-word">Purge choices</div>
+        <div class="strategy-action"><span class="red">Eliminate</span> answers that do not fit.</div>
+      </div>
+    </section>
+
+    <section class="quick-guide">
+      <div class="guide-item">
+        <h3>Start near the end</h3>
+        <p>The final sentence often creates the gap you need to fill.</p>
+      </div>
+      <div class="guide-item">
+        <h3>Use context</h3>
+        <p>Look back at the surrounding details before choosing.</p>
+      </div>
+      <div class="guide-item">
+        <h3>Predict first</h3>
+        <p>Say the missing idea in simple words.</p>
+      </div>
+      <div class="guide-item">
+        <h3>Stay supported</h3>
+        <p>The correct answer must be proven by the text.</p>
+      </div>
+    </section>
+
+    <h2 class="section-title">Inference Example</h2>
+    <section class="paper">
+      <p>Marine biologists studying a species of deep-sea octopus noticed that the animals gathered near warm water vents on the ocean floor. The vents created unusually warm conditions compared with the surrounding deep-sea environment. Eggs laid near the vents developed much faster than eggs laid in colder areas. Because faster development reduces the amount of time eggs are exposed to predators, researchers believe the octopuses may be choosing nesting sites that improve their offspring's chances of survival.</p>
+      <p class="question"><b>Question:</b> Which choice most logically follows from the text?</p>
+      <div class="answer-list">
+        <div class="answer">A. Deep-sea octopuses avoid laying eggs near warm water vents because the vents attract predators.</div>
+        <div class="answer correct"><span class="circle-letter">B</span><span class="correct-text">Warm water vents may make some nesting sites more beneficial for deep-sea octopuses than colder areas are.</span></div>
+        <div class="answer">C. Eggs laid in colder areas always fail to develop into adult octopuses.</div>
+        <div class="answer">D. Deep-sea octopuses are the only animals that use warm water vents for nesting.</div>
+      </div>
+    </section>
+
+    <section class="process">
+      <div class="process-box">
+        <h3>Last sentence</h3>
+        <p>Researchers think the octopuses choose sites that improve survival.</p>
+      </div>
+      <div class="process-box">
+        <h3>Context</h3>
+        <p>Warm vents help eggs develop faster, which reduces exposure to predators.</p>
+      </div>
+      <div class="process-box">
+        <h3>Prediction</h3>
+        <p>Warm vents are probably helpful nesting locations.</p>
+      </div>
+      <div class="process-box">
+        <h3>Correct choice</h3>
+        <p>B matches that prediction without adding unsupported claims.</p>
+      </div>
+    </section>
+
+    <h2 class="section-title">Detail-Based Inference</h2>
+    <section class="paper">
+      <p>Archaeologists studying an ancient settlement found several storage jars containing traces of wheat, barley, and lentils. The jars were located in a central building rather than in individual homes. The building also contained tools used to measure and divide grain. These findings suggest that the settlement's food supply may have been managed collectively rather than separately by each household.</p>
+      <p class="question"><b>Question:</b> Which choice is best supported by the text?</p>
+      <div class="answer-list">
+        <div class="answer">A. Each household in the settlement grew only one type of crop.</div>
+        <div class="answer">B. The settlement's residents did not know how to store grain safely.</div>
+        <div class="answer correct"><span class="circle-letter">C</span><span class="correct-text">Some food resources in the settlement may have been stored and distributed from a shared location.</span></div>
+        <div class="answer">D. The central building was used mainly as a place for religious ceremonies.</div>
+      </div>
+    </section>
+
+    <section class="trap-list">
+      <h2>Common inference traps</h2>
+      <ul>
+        <li><b>Too strong:</b> words like always, never, only, or must can make an answer too extreme.</li>
+        <li><b>Too broad:</b> the answer goes beyond what the text supports.</li>
+        <li><b>Topic match only:</b> the answer mentions the same topic but does not follow from the passage.</li>
+        <li><b>Opposite direction:</b> the answer reverses what the evidence suggests.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

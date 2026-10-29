@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAT Prep Book | Cross-Text Connections</title>
+  <style>
+
+    :root{
+      --bg:#ffffff;
+      --ink:#172033;
+      --muted:#637083;
+      --blue:#246b9a;
+      --cyan:#0789ad;
+      --red:#cc4d45;
+      --green:#16834f;
+      --yellow:#a97212;
+      --line:#d9e1ea;
+      --soft:#f7fafc;
+      --soft-blue:#edf7fb;
+      --paper:#ffffff;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:#fff;
+      color:var(--ink);
+      font-family:Inter,Segoe UI,Arial,sans-serif;
+      line-height:1.6;
+      overflow-x:hidden;
+    }
+    a{color:inherit}
+    .page{max-width:980px;margin:0 auto;padding:46px 28px 90px}
+
+    .hero{
+      padding:0 0 30px;
+      background:transparent;
+      border:0;
+      box-shadow:none;
+    }
+    .topline{display:block;margin:0 0 12px;text-align:center}
+    .star,.alert,.divider-dot,.subnote{display:none!important}
+    h1{
+      margin:0 auto 10px;
+      color:#14233a;
+      font-size:clamp(2.25rem,6vw,4.25rem);
+      letter-spacing:-.055em;
+      text-align:center;
+      font-weight:950;
+      line-height:.98;
+      width:min-content;
+      min-width:min(100%,720px);
+    }
+    h1:after{
+      content:"";
+      display:block;
+      width:190px;
+      height:5px;
+      margin:18px auto 0;
+      border-radius:999px;
+      background:linear-gradient(90deg,var(--cyan),#85c7bb);
+    }
+    .section-kicker{
+      color:var(--blue);
+      font-weight:850;
+      text-align:center;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      font-size:.74rem;
+      margin:34px 0 7px;
+    }
+    .section-title{
+      text-align:center;
+      font-size:clamp(1.65rem,4vw,2.25rem);
+      margin:0 0 24px;
+      font-weight:900;
+      color:#1c2e47;
+      text-decoration:none;
+    }
+    .youtube-badge{
+      display:inline-flex;align-items:center;justify-content:center;
+      width:38px;height:26px;background:#e84848;border-radius:8px;
+      margin-left:10px;vertical-align:middle;
+    }
+    .youtube-badge:after{content:"";width:0;height:0;border-left:11px solid #fff;border-top:7px solid transparent;border-bottom:7px solid transparent;margin-left:3px}
+
+    .qape-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:26px;
+      max-width:940px;
+      margin:18px auto 44px;
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      padding:28px 0;
+    }
+    .qape-grid:before{display:none}
+    .qape-card{
+      background:transparent;
+      color:#24344d;
+      min-height:0;
+      border:0;
+      border-radius:0;
+      padding:0 8px;
+      text-align:left;
+      font-weight:650;
+      box-shadow:none;
+      position:relative;
+    }
+    .qape-card:after{display:none}
+    .qape-card .icon{
+      width:42px;height:42px;border-radius:12px;
+      display:grid;place-items:center;
+      margin:0 0 14px;
+      background:var(--soft-blue);
+      border:1px solid #cfe8f2;
+      color:var(--blue);
+      box-shadow:none;
+      position:relative;
+      top:auto;left:auto;transform:none;
+    }
+    .qape-card .icon svg{width:24px;height:24px;display:block}
+    .qape-card p{margin:0;font-size:.98rem;max-width:220px}
+    .qape-card b{color:#067fa4;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+
+    .question-map{
+      display:grid;
+      grid-template-columns:1fr 60px 1fr;
+      align-items:center;
+      gap:16px;
+      max-width:850px;
+      margin:28px auto 20px;
+      background:transparent;
+      border:0;
+      border-radius:0;
+      padding:0;
+    }
+    .role{
+      text-align:center;
+      font-size:clamp(1.2rem,3vw,1.65rem);
+      font-weight:850;
+      color:#1f314c;
+      text-shadow:none;
+    }
+    .role small{display:block;font-size:.62em;color:#526277;margin-top:5px;font-weight:800}
+    .role .blue-underline{border-bottom:3px solid var(--cyan)}
+    .role .red-underline{border-bottom:3px solid var(--red)}
+    .arrow{
+      color:#657489;
+      font-weight:850;
+      text-align:center;
+      font-size:.85rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
+    .prompt-line{
+      text-align:center;
+      font-weight:650;
+      color:#37465b;
+      margin:0 auto 30px;
+      max-width:none;
+      white-space:nowrap;
+      font-size:clamp(.78rem,1.55vw,1rem);
+      line-height:1.35;
+    }
+    .prompt-line b{color:#1f2f46}
+
+    .strategy-box{
+      background:transparent;
+      border:0;
+      border-radius:0;
+      padding:0;
+      margin:22px auto 38px;
+      max-width:920px;
+      box-shadow:none;
+    }
+    .strategy-list{margin:0;padding:0;list-style:none}
+    .strategy-list li{
+      margin:0;
+      padding:15px 0;
+      border-left:0;
+      border-bottom:1px solid var(--line);
+    }
+    .strategy-list li:first-child{border-top:1px solid var(--line)}
+    .strategy-box b{color:#1f314c}
+    .hint{color:#546273}
+
+    .paper-card{
+      background:#fff;
+      color:#111827;
+      border-radius:14px;
+      padding:24px 28px;
+      margin:24px auto;
+      max-width:920px;
+      font-family:Georgia,'Times New Roman',serif;
+      font-size:1.13rem;
+      border:1px solid var(--line);
+      box-shadow:none;
+    }
+    .paper-card h3{margin:.1rem 0 .35rem;font-family:Georgia,'Times New Roman',serif;color:#05070a}
+    .paper-card p{margin:.6rem 0}
+    .hl-blue{border-bottom:4px solid var(--cyan)}
+    .hl-purple{box-shadow:inset 0 -8px rgba(119,103,200,.18);border-bottom:2px solid #7868c8}
+    .note-green{font-family:Segoe UI,Arial,sans-serif;color:#277a38;font-weight:750;font-size:.92rem;margin-left:10px}
+    .answer-list{font-family:Arial,sans-serif;margin-top:18px;font-size:1rem}
+    .answer{padding:10px 0;margin:8px 0;background:transparent;border-bottom:1px solid rgba(29,40,56,.12)}
+    .answer.correct{background:transparent;color:inherit;font-weight:400;padding:10px 0;border-radius:0;border-bottom:1px solid rgba(29,40,56,.12)}
+    .answer.wrong{color:#c43c32;font-weight:800}
+    .circle-letter{display:inline-grid;place-items:center;border:2px solid #328bc1;color:#111;border-radius:50%;width:31px;height:31px;margin-right:5px;font-weight:900;background:#fff}
+
+    .big-break{height:1px;background:var(--line);margin:48px 0}
+    .another{display:flex;justify-content:center;margin:38px 0 30px}
+    .another a{
+      display:inline-flex;align-items:center;gap:12px;
+      color:#1e314d;
+      border:1px solid #f0c3c0;
+      border-radius:999px;
+      padding:12px 22px;
+      font-size:clamp(1.2rem,3vw,1.65rem);
+      font-weight:850;
+      text-decoration:none;
+      background:#fff7f6;
+      box-shadow:none;
+      transition:.18s ease;
+    }
+    .another a:hover{transform:translateY(-1px);color:#c9423b;border-color:#e58f89}
+    .play-circle{width:34px;height:34px;border-radius:50%;display:inline-grid;place-items:center;position:relative;flex:0 0 auto;background:#e84848}
+    .play-circle:after{content:"";border-left:10px solid #fff;border-top:7px solid transparent;border-bottom:7px solid transparent;margin-left:3px}
+
+    .question-card{
+      max-width:680px;
+      margin:0 auto 36px;
+      background:#fff;
+      color:#111;
+      padding:20px 24px;
+      border-radius:14px;
+      font-family:Georgia,'Times New Roman',serif;
+      font-size:clamp(1.45rem,4vw,2rem);
+      line-height:1.12;
+      box-shadow:none;
+      position:relative;
+      border:1px solid var(--line);
+    }
+    .question-card:before{
+      content:"?";
+      position:absolute;left:-18px;top:-18px;
+      width:38px;height:38px;border-radius:50%;background:#328bc1;color:#fff;
+      display:grid;place-items:center;border:3px solid #fff;
+      font-family:Arial,sans-serif;font-weight:900;
+    }
+    .step-title{
+      text-align:center;color:var(--blue);font-size:1.25rem;font-weight:850;
+      text-decoration:underline;text-underline-offset:5px;margin:40px 0 16px;
+    }
+    .summary-line{max-width:830px;margin:12px auto 42px;font-weight:750;color:#344054}
+    .summary-line span{color:var(--cyan);text-decoration:underline;font-weight:850}
+    .summary-line b{color:#253044}
+
+    .analysis-map{
+      max-width:920px;
+      margin:20px auto 36px;
+      display:grid;
+      grid-template-columns:1fr 58px 1fr;
+      gap:18px;
+      align-items:center;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:22px;
+      background:#fff;
+    }
+    .mini-pov,.mini-research{font-weight:750;font-style:italic;color:#344054}
+    .mini-pov span{color:var(--cyan);text-decoration:underline;font-weight:850}
+    .mini-research span{color:var(--yellow);text-decoration:underline;font-weight:850}
+    .curved{font-size:1.8rem;color:var(--red);text-align:center;font-weight:900}
+    .bridge{grid-column:1/-1;text-align:center;font-size:1.1rem;font-weight:850;margin-top:8px;color:#344054;border-top:1px solid var(--line);padding-top:18px}
+    .bridge .disagree{color:var(--red);text-decoration:underline}
+    .bridge .claim{border-bottom:4px solid var(--green)}
+    .answers-final{
+      max-width:920px;margin:14px auto 0;background:#fff;color:#111;border-radius:14px;
+      padding:22px 26px;font-family:Georgia,'Times New Roman',serif;font-size:1.2rem;
+      box-shadow:none;border:1px solid var(--line);
+    }
+    .answers-final div{margin:6px 0}.answers-final .bad{color:#c92a24;font-weight:800}.answers-final .good{color:#128637;font-weight:900}
+
+    .quick-rules{margin:54px auto 0;max-width:920px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .rule{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;color:#344054;box-shadow:none}
+    .rule b{color:var(--blue)}
+    footer{display:none}
+
+    @media (max-width:820px){
+      .page{padding:30px 18px 60px}
+      .qape-grid,.quick-rules{grid-template-columns:1fr 1fr}
+      .question-map{grid-template-columns:1fr}.arrow{display:none}
+      .analysis-map{grid-template-columns:1fr}.curved{display:none}
+      .paper-card{font-size:1rem;padding:20px}
+      .strategy-box{padding:20px}
+    }
+    @media (max-width:560px){
+      .qape-grid,.quick-rules{grid-template-columns:1fr}
+      h1{width:auto;min-width:0}
+      .question-card:before{left:12px;top:-22px}
+      .prompt-line{font-size:.64rem;letter-spacing:-.015em}
+    }
+    @media print{body{background:#fff}.page{max-width:none}}
+
+    </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="topline">
+        <h1>Cross-Text Connections</h1>
+      </div>
+      <div class="subnote">SAT Reading & Writing · Cross-text response strategy</div>
+
+      <p class="section-kicker">Strategy</p>
+      <h2 class="section-title">QAPE Strategy <a href="https://www.youtube.com/watch?v=hBbZtGoBA44&feature=youtu.be" target="_blank" rel="noopener" aria-label="Open YouTube strategy video"><span class="youtube-badge"></span></a></h2>
+
+      <div class="qape-grid" aria-label="QAPE steps">
+        <div class="qape-card"><div class="icon"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="19" fill="none" stroke="currentColor" stroke-width="3"/><path d="M17 18c1.2-4.2 4.7-6.5 8.8-6.1 4.2.4 7.2 3.1 7.2 6.8 0 5.5-6 5.5-6 10" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><circle cx="27" cy="36" r="2.4" fill="currentColor"/></svg></div><p>Start with the responder, find their main idea and get into their <b>perspective</b></p></div>
+        <div class="qape-card"><div class="icon"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="21" cy="21" r="10" fill="none" stroke="currentColor" stroke-width="3.5"/><path d="M29 29l8 8" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><path d="M16 21h10M21 16v10" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity=".55"/></svg></div><p>After reading the responder, <b>read the other text</b> and see how they would react.</p></div>
+        <div class="qape-card"><div class="icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M15 33h20a8 8 0 0 0 0-16 11 11 0 0 0-21-2 9 9 0 0 0 1 18Z" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="round"/><path d="M18 25c3-4 9-4 12 0" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity=".55"/></svg></div><p><b>Predict</b> how the responder will react</p></div>
+        <div class="qape-card"><div class="icon"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="10" width="28" height="28" rx="9" fill="none" stroke="currentColor" stroke-width="3"/><path d="M18 18l12 12M30 18L18 30" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg></div><p>Eliminate choices that don’t match <b>your prediction</b></p></div>
+      </div>
+
+      <div class="question-map">
+        <div class="role">Responder<small><span class="blue-underline">Singh and Roy (Text 2)</span></small></div>
+        <div class="arrow">to</div>
+        <div class="role">Responding to<small><span class="red-underline">the research discussed in Text 1?</span></small></div>
+      </div>
+      <p class="prompt-line">Based on the texts, how would <b>Singh and Roy (Text 2)</b> most likely respond to <b>the research discussed in Text 1</b>?</p>
+
+      <div class="strategy-box">
+        <ul class="strategy-list">
+          <li><b>Read the question first.</b><br><span class="hint">See what relationship it asks about: “How would Text 2 respond to Text 1?”, “Where do they agree?”, etc. This tells you what to look for.</span></li>
+          <li><b>Summarize each passage quickly.</b><br><span class="hint">For Text 1 and Text 2, note the main claim, tone, and evidence. Try to put each into one clear sentence.</span></li>
+          <li><b>Compare perspectives / relationships.</b><br><span class="hint">Decide whether the texts agree, disagree/respond critically, or partially agree/refine each other. Note how they relate - which part of one text the other is addressing.</span></li>
+          <li><b>Look for key language clues.</b><br><span class="hint">Contrast words like “however,” “but,” “on the other hand,” “while,” “responds,” “challenges,” and “supports” show the interaction.</span></li>
+          <li><b>Match with answer choices and eliminate.</b><br><span class="hint">Before picking, predict what the answer should say. Then eliminate choices that reverse the relationship, go beyond the text, or use extreme language.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="paper-card">
+        <h3>Text 1</h3>
+        <p>Graphic novels are increasingly popular in bookstores and libraries, but they shouldn’t be classified as literature. By definition, literature tells a story or conveys meaning through language only; graphic novels tell stories through illustrations and use language <span class="hl-blue">only sparingly</span>, in captions and dialogue. Graphic novels are experienced as series of images and not as language, making them more similar to film than to literature. <span class="note-green">NO! The words are good and important!</span></p>
+        <h3>Text 2</h3>
+        <p>Graphic novels present their stories through both language and images. Without captions and dialogue, readers would be unable to understand what is depicted in the illustrations: the story results from the interaction of text and image. Moreover, Alison Bechdel’s <i>Fun Home</i> and many other graphic novels feature text that is as beautifully written as the prose found in many standard novels. <span class="hl-purple">Therefore, graphic novels qualify as literary texts.</span> <span class="note-green">because words good and images important</span></p>
+        <p><b>Question:</b> Based on the texts, how would the author of Text 2 most likely respond to the overall argument presented in Text 1?</p>
+        <div class="answer-list">
+          <div class="answer correct"><span class="circle-letter">A</span> By asserting that language plays a more important role in graphic novels than the author of Text 1 recognizes</div>
+          <div class="answer">B. By acknowledging that the author of Text 1 has identified a flaw that is common to all graphic novels</div>
+          <div class="answer">C. By suggesting that the story lines of certain graphic novels are more difficult to understand than the author of Text 1 claims</div>
+          <div class="answer">D. By agreeing with the author of Text 1 that most graphic novels aren’t as well crafted as most literary works are</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="big-break"></div>
+
+    <section id="another-strategy">
+      <div class="another">
+        <a href="https://www.youtube.com/watch?v=hBbZtGoBA44&feature=youtu.be" target="_blank" rel="noopener" title="Open the YouTube video">
+          Another Strategy <span class="play-circle" aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div class="question-card">Based on the texts, how would Singh and Roy (Text 2) most likely respond to <span class="hl-blue">the research discussed</span> in <span class="hl-blue">Text 1?</span></div>
+
+      <h2 class="step-title">Find the research</h2>
+      <div class="paper-card" style="max-width:740px">
+        <h3>Text 1</h3>
+        <p>Public policy researcher Anthony Fowler studied the history of elections in Australia, a country that requires citizens to vote. Fowler argues that <span class="hl-blue">requiring citizens to vote</span> leads to a <span class="hl-blue">significant increase in voters</span> who would otherwise not have the time or motivation to vote. Thus, election results in countries that require citizens to vote better reflect the preferences of the country as a whole.</p>
+      </div>
+      <p class="summary-line"><span>Research:</span> <b>Requiring citizens to vote leads to a significant increase in voters</b></p>
+
+      <h2 class="step-title">Find Text 2 POV</h2>
+      <div class="paper-card" style="max-width:740px">
+        <h3>Text 2</h3>
+        <p>Governments in democratic countries function better when more people vote. However, <span class="hl-blue">forcing people to vote may have negative consequences.</span> Shane P. Singh and Jason Roy studied what happens when a country requires its citizens to vote. They found that when people feel forced to vote, they tend to spend less time looking for information about their choices when voting. As a result, votes from these voters may not reflect their actual preferences.</p>
+      </div>
+      <p class="summary-line"><span>(Text 2) POV:</span> <b>Forcing people to vote may have negative consequences - votes will not reflect their preferences</b></p>
+
+      <h2 class="step-title">Formulate answer</h2>
+      <p class="prompt-line"><b style="color:var(--cyan)">(Text 2)</b> Respond <b style="color:var(--yellow)">the research</b></p>
+      <div class="analysis-map">
+        <div class="mini-pov"><span>(Text 2) POV:</span> Forcing people to vote may have negative consequences - votes will not reflect their preferences</div>
+        <div class="curved">↪</div>
+        <div class="mini-research"><span>Research:</span> Requiring citizens to vote leads to significant increase in voters</div>
+        <div class="bridge"><span class="disagree">Disagree</span> forcing voters <span class="claim">will not reflect their preferences</span></div>
+      </div>
+
+      <h2 class="step-title">Find the answer</h2>
+      <div class="answers-final">
+        <div class="bad">A. Only countries of a certain population size should implement mandatory voting.</div>
+        <div class="bad">B. People who are forced to vote are likely to become politically engaged in other ways, such as volunteering or running for office.</div>
+        <div class="good">C. Requiring people to vote does not necessarily lead to election outcomes that better represent the preferences of the country as a whole.</div>
+        <div>D. Countries that require voting must also make the process of voting easier for their citizens.</div>
+      </div>
+    </section>
+
+    <section class="quick-rules" aria-label="SAT quick rules">
+      <div class="rule"><b>Find the responder first.</b><br>The correct answer must sound like the responder’s point of view, not the other text’s.</div>
+      <div class="rule"><b>Name the relationship.</b><br>Agree, disagree, refine, or challenge - choose before looking at the answers.</div>
+      <div class="rule"><b>Eliminate traps.</b><br>Wrong answers often reverse the claim, add unsupported ideas, or use extreme wording.</div>
+    </section>
+
+  </main>
+</body>
+</html>

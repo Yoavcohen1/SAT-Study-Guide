@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Text Structure and Purpose</title>
+  <style>
+    :root{
+      --bg:#ffffff;
+      --ink:#111827;
+      --muted:#5d6878;
+      --blue:#0077a8;
+      --cyan:#0789ad;
+      --red:#cf2e2e;
+      --green:#0b7a36;
+      --yellow:#a97212;
+      --line:#dce4ec;
+      --soft:#f7fafc;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family:Inter,Segoe UI,Arial,sans-serif;
+      line-height:1.65;
+      overflow-x:hidden;
+    }
+    a{color:inherit}
+    .wrap{max-width:1050px;margin:0 auto;padding:34px 28px 90px}
+    .hero{text-align:center;margin:10px auto 34px;max-width:850px}
+    .kicker{margin:0 0 8px;color:var(--muted);font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:.78rem}
+    h1{margin:0;color:#111827;font-size:clamp(2.4rem,5vw,4.5rem);line-height:1.04;letter-spacing:-.055em;font-weight:950}
+    .intro{margin:18px auto 0;max-width:760px;color:#445164;font-size:1.08rem;font-weight:520}
+    .title-rule{width:92px;height:4px;border-radius:999px;background:linear-gradient(90deg,#6fb7d5,#9fd6c5);margin:18px auto 0}
+    .section-title{margin:44px 0 22px;text-align:center;color:#121826;font-size:clamp(1.65rem,3vw,2.2rem);line-height:1.15;font-weight:950;letter-spacing:-.035em;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:7px}
+    .youtube-badge{display:inline-grid;place-items:center;width:34px;height:24px;background:#ff1717;border-radius:7px;margin-left:8px;vertical-align:middle;position:relative;top:-2px}
+    .youtube-badge:after{content:"";border-left:9px solid white;border-top:6px solid transparent;border-bottom:6px solid transparent;margin-left:2px}
+
+    .plain-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;margin:20px 0 30px}
+    .step{text-align:center;padding:6px 10px 20px;border-bottom:3px solid transparent;border-image:linear-gradient(90deg,#79b8dc,#9ed5c5) 1}
+    .icon{width:54px;height:54px;margin:0 auto 12px;border:1px solid #b9d9e7;border-radius:18px;display:grid;place-items:center;color:#1477a9;background:#f7fcff}
+    .icon svg{width:31px;height:31px}
+    .step h3{margin:0 0 6px;color:#142039;font-size:1.12rem;font-weight:900}
+    .step p{margin:0 auto;color:#172033;font-weight:720;max-width:270px;line-height:1.45}
+    .mark{color:var(--cyan);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px}
+
+    .ace-table{max-width:760px;margin:34px auto 42px;border-top:1px solid #cfd8e3;border-bottom:1px solid #cfd8e3}
+    .ace-row{display:grid;grid-template-columns:210px 1fr;border-bottom:1px solid #cfd8e3;min-height:66px;align-items:center}
+    .ace-row:last-child{border-bottom:0}
+    .ace-word{font-size:1.55rem;font-weight:950;padding:12px 28px;border-right:1px solid #cfd8e3;color:#111827}
+    .ace-word:before{content:"-";margin-right:0}
+    .ace-action{padding:12px 28px;font-size:1.12rem;font-weight:800;color:#1f2937}
+    .blue-text{color:#247db7}.yellow-text{color:#b78a00}.red-text{color:#d63b3b}
+
+    .paper{background:#fff;border:1px solid var(--line);border-radius:12px;padding:24px 28px;margin:18px auto 34px;box-shadow:0 10px 28px rgba(17,24,39,.05);font-family:Georgia,'Times New Roman',serif;font-size:1.06rem;line-height:1.55;position:relative}
+    .paper h3{font-family:Georgia,'Times New Roman',serif;margin:.1rem 0 .4rem;color:#05070a;font-size:1.35rem}
+    .paper p{margin:.7rem 0}
+    .id-tag{display:inline-block;background:#111d4a;color:#fff;font:800 .86rem Arial,sans-serif;padding:5px 26px;border-radius:2px;margin-bottom:8px}
+    .hl-blue{border-bottom:3px solid #23a7d8}.hl-red{border-bottom:3px solid #de4a4a}.annotation{color:#d51e1e;font-family:Arial,sans-serif;font-weight:800;display:inline-block;margin-left:22px}
+
+    .answer-list{font-family:Arial,sans-serif;margin-top:18px;font-size:1rem;line-height:1.55}
+    .answer{padding:10px 0;margin:8px 0;background:transparent;border-bottom:1px solid rgba(29,40,56,.12);color:#111827;font-weight:400}
+    .answer.correct{background:transparent;color:#111827;font-weight:400;padding:10px 0;border-radius:0;border-bottom:1px solid rgba(29,40,56,.12)}
+    .circle-letter{display:inline-grid;place-items:center;border:2px solid #328bc1;color:#111;border-radius:50%;width:31px;height:31px;margin-right:5px;font-weight:900;background:#fff;font-family:Arial,sans-serif}
+    .correct-text{font-size:1rem;font-weight:400;color:#111827}
+
+    .guide{margin:46px 0 26px}
+    .guide-intro{max-width:760px;margin:0 auto 22px;color:#263244;font-size:1.05rem}
+    .guide-block{padding:18px 0;border-bottom:1px solid #e3e9ef;max-width:820px;margin:0 auto}
+    .guide-block h3{margin:0 0 7px;color:#111827;font-size:1.08rem;font-weight:900;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px}
+    .guide-block p{margin:0;color:#273449}
+    .guide-block strong{color:#b88600}
+    .think-line{color:#b032aa;font-style:italic;font-weight:720}
+    .avoid-list{margin:8px 0 0;padding-left:22px;color:#273449}
+
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:32px 0}
+    .mini-box{border:1px solid var(--line);border-radius:14px;padding:20px;background:#fff}
+    .mini-box h3{margin:0 0 8px;font-size:1.05rem;color:#111827}.mini-box p{margin:0;color:#334155}
+    .pill-link-wrap{text-align:center;margin:42px 0 0}
+    .pill-link{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:999px;border:1px solid #f2b1b1;background:#fff7f7;color:#c82323;text-decoration:none;font-weight:900}
+    .play-circle{display:inline-block;width:20px;height:20px;background:#ff1717;border-radius:50%;position:relative}
+    .play-circle:after{content:"";position:absolute;left:8px;top:5px;border-left:7px solid white;border-top:5px solid transparent;border-bottom:5px solid transparent}
+
+    @media (max-width:820px){
+      .wrap{padding:24px 18px 60px}.plain-steps{grid-template-columns:1fr}.ace-row{grid-template-columns:1fr}.ace-word{border-right:0;border-bottom:1px solid #e5eaf0}.paper{font-size:1rem;padding:20px}.two-col{grid-template-columns:1fr}
+    }
+    @media print{.wrap{max-width:none}.pill-link-wrap{display:none}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <p class="kicker">Reading Strategy</p>
+      <h1>Text Structure and Purpose</h1>
+      <div class="title-rule"></div>
+      <p class="intro">For these questions, identify what the text or a specific sentence is doing, then choose the answer that matches that role.</p>
+    </header>
+
+    <h2 class="section-title">ACE Strategy <a href="https://www.youtube.com/watch?v=fAHc6HnySgE&t=37s" target="_blank" rel="noopener" aria-label="Open Text Structure and Purpose video"><span class="youtube-badge"></span></a></h2>
+
+    <div class="plain-steps" aria-label="ACE steps">
+      <div class="step"><div class="icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 36h28" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M14 32V14h20v18" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M18 20h12M18 26h9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity=".65"/></svg></div><h3>Analyze</h3><p><b class="mark">Read the passage</b> to understand the main idea.</p></div>
+      <div class="step"><div class="icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M12 14h24M12 24h18M12 34h24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M34 22l5 5-5 5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Clarify</h3><p><b class="mark">Express it</b> in your own words.</p></div>
+      <div class="step"><div class="icon"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="10" width="28" height="28" rx="9" fill="none" stroke="currentColor" stroke-width="3"/><path d="M18 18l12 12M30 18L18 30" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg></div><h3>Eliminate</h3><p><b class="mark">Remove options</b> that do not match the text.</p></div>
+    </div>
+
+    <div class="ace-table" aria-label="ACE strategy table">
+      <div class="ace-row"><div class="ace-word">Analyze</div><div class="ace-action"><span class="blue-text">Read all passage</span> to understand the idea</div></div>
+      <div class="ace-row"><div class="ace-word">Clarify</div><div class="ace-action"><span class="yellow-text">Express it</span> in your own words</div></div>
+      <div class="ace-row"><div class="ace-word">Eliminate</div><div class="ace-action"><span class="red-text">Remove options</span> that do not match</div></div>
+    </div>
+
+    <section>
+      <h2 class="section-title">Purpose Questions</h2>
+      <div class="paper">
+        <span class="id-tag">ID: 48555763</span>
+        <p>The following text is from Herman Melville's 1854 novel <i>The Lightning-rod Man</i>. The stranger still stood in the exact middle of the cottage, where he had first planted himself. <span class="hl-blue">His singularity impelled a closer scrutiny.</span> A lean, gloomy figure. Hair dark and lank, mattedly streaked over his brow. His sunken pitfalls of eyes were ringed by indigo halos, and played with an innocuous sort of lightning: the gleam without the bolt. The whole man was dripping. He stood in a puddle on the bare oak floor: his strange walking-stick vertically resting at his side. <span class="annotation">the reason to pay close attention</span></p>
+        <p><b>Question:</b> Which choice best states the function of the underlined sentence in the overall structure of the text?</p>
+        <div class="answer-list">
+          <div class="answer">A. It elaborates on the previous sentence's description of the character.</div>
+          <div class="answer">B. It introduces the setting that is described in the sentences that follow.</div>
+          <div class="answer">C. It establishes a contrast with the description in the previous sentence.</div>
+          <div class="answer correct"><span class="circle-letter">D</span> <span class="correct-text">It sets up the character description presented in the sentences that follow.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Structure Questions</h2>
+      <div class="paper">
+        <span class="id-tag">ID: 5e732e67</span>
+        <p><span class="hl-red">Many films</span> from the early 1900s have been <span class="hl-red">lost</span>. These losses include several films by the first wave of Black women filmmakers. We know about these <span class="hl-blue">lost movies only from small pieces of evidence</span>. For example, an advertisement for Jennie Louise Toussaint Welcome's documentary <i>Doing Their Bit</i> still exists. There is a reference in a magazine to Tressie Souders's film <i>A Woman's Error</i>. And Maria P. Williams's <i>The Flames of Wrath</i> is mentioned in a letter and a newspaper article, and one image from the movie was discovered in the 1990s. <span class="annotation">Lost films<br>Evidence of lost films</span></p>
+        <p><b>Question:</b> Which choice best describes the overall structure of the text?</p>
+        <div class="answer-list">
+          <div class="answer">A. The text identifies a complex problem, then presents examples of unsuccessful attempts to solve that problem.</div>
+          <div class="answer">B. The text summarizes a debate among researchers, then gives reasons for supporting one side in that debate.</div>
+          <div class="answer correct"><span class="circle-letter">C</span> <span class="correct-text">The text describes a general situation, then illustrates that situation with specific examples.</span></div>
+          <div class="answer">D. The text discusses several notable individuals, then explains commonly overlooked differences between those individuals.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="guide">
+      <h2 class="section-title">How to Think About These Questions</h2>
+      <p class="guide-intro">There are three common types of text structure and purpose questions. Each one asks you to describe what the passage or a specific sentence is doing.</p>
+      <div class="guide-block">
+        <h3>Main function of the text</h3>
+        <p>These are basically main idea questions in different wording. Read the passage, notice what each line contributes, then <strong>create a main idea in your head</strong> before checking the answer choices.</p>
+      </div>
+      <div class="guide-block">
+        <h3>Function of a specific line</h3>
+        <p>Go back to the underlined line and ask what that line only contributes. Does it present a generalization, hypothesis, conclusion, example, contrast, or setup? <span class="think-line">Try labeling the sentence in two or three words.</span></p>
+      </div>
+      <div class="guide-block">
+        <h3>Overall structure</h3>
+        <p>Find the role of each sentence or section and the order in which they appear. The correct answer should match both the roles and the sequence.</p>
+      </div>
+      <div class="guide-block">
+        <h3>Avoid answers that are</h3>
+        <ul class="avoid-list">
+          <li>incorrect according to the text</li>
+          <li>outside the scope of the text or based on an unsupported assumption</li>
+          <li>too extreme compared with what the passage actually says</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="mini-box"><h3>Quick test</h3><p>Can you label the sentence in two or three words? Example: gives example, introduces contrast, sets up description, states conclusion.</p></div>
+      <div class="mini-box"><h3>Answer trap</h3><p>Wrong answers often sound related to the topic, but they describe the wrong role or the wrong order.</p></div>
+    </div>
+
+    <div class="pill-link-wrap">
+      <a class="pill-link" href="https://www.youtube.com/watch?v=fAHc6HnySgE&t=37s" target="_blank" rel="noopener">Watch ACE Strategy <span class="play-circle" aria-hidden="true"></span></a>
+    </div>
+  </main>
+</body>
+</html>

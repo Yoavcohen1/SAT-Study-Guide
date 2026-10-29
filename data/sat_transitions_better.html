@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAT Transitions</title>
+  <style>
+    :root{
+      --bg:#ffffff;
+      --ink:#172033;
+      --muted:#5d6878;
+      --line:#dce4ec;
+      --soft:#f7fafc;
+      --soft2:#eef6fb;
+      --blue:#1f74a8;
+      --cyan:#0789ad;
+      --pink:#b832a6;
+      --red:#c93636;
+      --yellow:#9b7300;
+      --green:#127452;
+      --shadow:0 14px 34px rgba(16,24,40,.07);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family:Inter,Segoe UI,Arial,sans-serif;
+      line-height:1.65;
+    }
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:36px 28px 90px;
+    }
+    .hero{
+      text-align:center;
+      margin:4px auto 32px;
+    }
+    .kicker{
+      margin:0 0 7px;
+      color:var(--muted);
+      font-weight:850;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size:.78rem;
+    }
+    h1{
+      margin:0;
+      font-size:clamp(2.45rem,5vw,4.35rem);
+      line-height:1.04;
+      letter-spacing:-.05em;
+      font-weight:950;
+    }
+    .title-rule{
+      width:96px;
+      height:4px;
+      border-radius:999px;
+      background:linear-gradient(90deg,#7cc7df,#9fd6c1);
+      margin:18px auto 0;
+    }
+    .intro{
+      max-width:760px;
+      margin:18px auto 0;
+      color:#344054;
+      font-size:1.08rem;
+      font-weight:560;
+    }
+    .section-title{
+      margin:46px 0 20px;
+      font-size:clamp(1.75rem,3.5vw,2.55rem);
+      line-height:1.12;
+      letter-spacing:-.035em;
+      font-weight:950;
+      text-align:center;
+    }
+    .youtube-badge{
+      display:inline-flex;
+      width:34px;
+      height:24px;
+      background:#ff1010;
+      border-radius:7px;
+      margin-left:8px;
+      vertical-align:middle;
+      position:relative;
+      transform:translateY(-2px);
+    }
+    .youtube-badge:after{
+      content:"";
+      position:absolute;
+      left:13px;
+      top:7px;
+      border-left:9px solid white;
+      border-top:5px solid transparent;
+      border-bottom:5px solid transparent;
+    }
+
+    .strategy{
+      max-width:900px;
+      margin:0 auto 34px;
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      background:#fff;
+    }
+    .strategy-row{
+      display:grid;
+      grid-template-columns:240px 1fr;
+      align-items:center;
+      min-height:76px;
+      border-bottom:1px solid var(--line);
+    }
+    .strategy-row:last-child{border-bottom:0}
+    .strategy-word{
+      padding:18px 26px;
+      border-right:1px solid var(--line);
+      font-size:1.72rem;
+      line-height:1.1;
+      font-weight:950;
+      letter-spacing:-.035em;
+    }
+    .strategy-action{
+      padding:18px 26px;
+      font-size:1.18rem;
+      font-weight:720;
+    }
+    .blue{color:#4d93c4;font-weight:900}
+    .cyan{color:#03a6ca;font-weight:900}
+    .pink{color:#c93ebd;font-weight:900}
+    .red{color:#e13232;font-weight:900}
+    .yellow{color:#b28b00;font-weight:900}
+    .under{
+      text-decoration:underline;
+      text-decoration-thickness:3px;
+      text-underline-offset:4px;
+    }
+
+    .mini-guide{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:18px;
+      max-width:980px;
+      margin:30px auto 46px;
+    }
+    .guide-item{
+      border-top:3px solid #9ed0df;
+      padding-top:13px;
+    }
+    .guide-item h3{
+      margin:0 0 7px;
+      font-size:1.08rem;
+      line-height:1.2;
+      font-weight:950;
+      letter-spacing:-.015em;
+    }
+    .guide-item p{
+      margin:0;
+      color:#344054;
+      font-size:.98rem;
+    }
+
+    .table-wrap{
+      margin:22px auto 48px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      background:#fff;
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      table-layout:fixed;
+      font-size:.94rem;
+      line-height:1.35;
+    }
+    th{
+      background:#172033;
+      color:#fff;
+      text-align:left;
+      padding:14px 16px;
+      font-size:.9rem;
+      letter-spacing:.02em;
+    }
+    td{
+      border-top:1px solid var(--line);
+      border-right:1px solid var(--line);
+      padding:14px 16px;
+      vertical-align:top;
+    }
+    td:last-child,th:last-child{border-right:0}
+    tbody tr:nth-child(even){background:#fbfdff}
+    .type{
+      background:#fff4f2;
+      font-weight:850;
+      color:#172033;
+    }
+    .type span{
+      display:block;
+      color:#5d6878;
+      font-weight:560;
+      margin-top:2px;
+      font-size:.88rem;
+    }
+    .words{
+      font-weight:650;
+      color:#172033;
+    }
+    .sentence{
+      color:#344054;
+    }
+    .inter{
+      color:#344054;
+      font-weight:620;
+    }
+
+    .paper{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:24px 28px;
+      box-shadow:var(--shadow);
+      margin:24px auto;
+      max-width:920px;
+      font-family:Georgia,Times New Roman,serif;
+      color:#101828;
+      font-size:1.05rem;
+      line-height:1.62;
+    }
+    .paper h3{
+      margin:0 0 10px;
+      font-family:Inter,Segoe UI,Arial,sans-serif;
+      font-size:1rem;
+      color:#172033;
+      letter-spacing:.02em;
+    }
+    .blank{
+      display:inline-block;
+      min-width:84px;
+      border-bottom:2px solid #172033;
+      transform:translateY(-2px);
+    }
+    .question{
+      margin-top:20px;
+      font-family:Inter,Segoe UI,Arial,sans-serif;
+    }
+    .answer-list{
+      margin-top:18px;
+      font-family:Inter,Segoe UI,Arial,sans-serif;
+      font-size:1rem;
+    }
+    .answer{
+      padding:13px 0;
+      border-bottom:1px solid #edf1f5;
+      color:#101828;
+      font-weight:400;
+    }
+    .answer.correct{
+      color:#101828;
+      font-weight:400;
+      background:transparent;
+    }
+    .circle-letter{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:28px;
+      height:28px;
+      border:2px solid #168fd0;
+      border-radius:50%;
+      margin-right:8px;
+      font-weight:700;
+      color:#101828;
+      font-family:Inter,Segoe UI,Arial,sans-serif;
+    }
+    .correct-text{
+      font-weight:400;
+      color:#101828;
+    }
+    .think-box{
+      max-width:920px;
+      margin:18px auto 42px;
+      padding:0;
+    }
+    .think-box h2{
+      margin:0 0 10px;
+      font-size:1.55rem;
+      letter-spacing:-.025em;
+    }
+    .think-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
+    .think{
+      border-left:4px solid #9ed0df;
+      background:var(--soft);
+      padding:16px 18px;
+      border-radius:0 12px 12px 0;
+    }
+    .think h3{
+      margin:0 0 6px;
+      font-size:1.05rem;
+    }
+    .think p{margin:0;color:#344054}
+
+    .pill-link-wrap{text-align:center;margin:42px 0 6px}
+    .pill-link{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      color:#172033;
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:999px;
+      padding:12px 18px;
+      font-weight:850;
+      box-shadow:0 8px 22px rgba(16,24,40,.06);
+    }
+    .play-circle{
+      width:24px;
+      height:24px;
+      border-radius:50%;
+      background:#ff1010;
+      position:relative;
+      display:inline-block;
+    }
+    .play-circle:after{
+      content:"";
+      position:absolute;
+      left:9px;
+      top:6px;
+      border-left:8px solid #fff;
+      border-top:5px solid transparent;
+      border-bottom:5px solid transparent;
+    }
+
+    @media(max-width:900px){
+      .mini-guide{grid-template-columns:1fr 1fr}
+      .strategy-row{grid-template-columns:1fr}
+      .strategy-word{border-right:0;border-bottom:1px solid var(--line);padding:14px 18px}
+      .strategy-action{padding:14px 18px}
+      table{font-size:.9rem}
+    }
+    @media(max-width:700px){
+      .wrap{padding:26px 18px 70px}
+      .mini-guide,.think-grid{grid-template-columns:1fr}
+      .table-wrap{overflow-x:auto}
+      table{min-width:880px}
+      .paper{padding:20px}
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <p class="kicker">Expression of Ideas</p>
+      <h1>Transitions</h1>
+      <div class="title-rule"></div>
+      <p class="intro">Transition questions test whether you understand the relationship between two ideas. Do not choose by vibe. Read around the blank, name the relationship, then pick the matching transition.</p>
+    </header>
+
+    <h2 class="section-title">SLAP Strategy <a href="https://www.youtube.com/watch?v=xvhccF_tkIE&feature=youtu.be" target="_blank" rel="noopener" aria-label="Open Transitions video"><span class="youtube-badge"></span></a></h2>
+
+    <section class="strategy" aria-label="SLAP strategy">
+      <div class="strategy-row">
+        <div class="strategy-word">Scan</div>
+        <div class="strategy-action">Read the sentences <span class="blue">before</span> and <span class="cyan">after</span> the blank.</div>
+      </div>
+      <div class="strategy-row">
+        <div class="strategy-word">Link</div>
+        <div class="strategy-action"><span class="pink">Identify</span> the <span class="red under">relationship</span>.</div>
+      </div>
+      <div class="strategy-row">
+        <div class="strategy-word">Anticipate</div>
+        <div class="strategy-action"><span class="yellow">Predict</span> the transition word that will fit.</div>
+      </div>
+      <div class="strategy-row">
+        <div class="strategy-word">Purge</div>
+        <div class="strategy-action"><span class="red">Eliminate</span> choices that do not match your prediction.</div>
+      </div>
+    </section>
+
+    <section class="mini-guide">
+      <div class="guide-item">
+        <h3>Scan</h3>
+        <p>Look at the sentence before and after the blank.</p>
+      </div>
+      <div class="guide-item">
+        <h3>Link</h3>
+        <p>Ask: are the ideas adding, contrasting, explaining, or causing?</p>
+      </div>
+      <div class="guide-item">
+        <h3>Anticipate</h3>
+        <p>Predict the type of transition before reading the answers.</p>
+      </div>
+      <div class="guide-item">
+        <h3>Purge</h3>
+        <p>Remove choices with the wrong relationship, even if they sound fancy.</p>
+      </div>
+    </section>
+
+    <h2 class="section-title">Transition Types</h2>
+    <div class="table-wrap">
+      <table aria-label="Transition types and examples">
+        <thead>
+          <tr>
+            <th style="width:27%">Transition Type</th>
+            <th style="width:25%">Transition Words</th>
+            <th style="width:33%">Sample Sentence</th>
+            <th style="width:15%">Use</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="type">Additions or Continuations<span>Adding similar information</span></td>
+            <td class="words">Additionally, furthermore, in addition, moreover, also</td>
+            <td class="sentence">The company implemented new training programs. Additionally, it updated its safety protocols.</td>
+            <td class="inter">Mostly interchangeable</td>
+          </tr>
+          <tr>
+            <td class="type">Comparisons<span>Similarity or parallel ideas</span></td>
+            <td class="words">Likewise, similarly</td>
+            <td class="sentence">The museum expanded its exhibits to attract new visitors. Likewise, the library increased its community outreach.</td>
+            <td class="inter">Mostly interchangeable</td>
+          </tr>
+          <tr>
+            <td class="type">Examples<span>Specific example or instance</span></td>
+            <td class="words">For example, for instance</td>
+            <td class="sentence">Many species are endangered due to habitat loss. For example, the Amur leopard has seen a sharp decline.</td>
+            <td class="inter">Interchangeable</td>
+          </tr>
+          <tr>
+            <td class="type">Specific Emphasis<span>Highlighting a particular aspect</span></td>
+            <td class="words">Specifically, in particular</td>
+            <td class="sentence">Pollution affects many habitats. Specifically, coral reefs are at risk due to rising ocean temperatures.</td>
+            <td class="inter">Different emphasis</td>
+          </tr>
+          <tr>
+            <td class="type">Clarification or Rephrasing<span>Restating for clarity</span></td>
+            <td class="words">In other words, that is, that is to say</td>
+            <td class="sentence">Her popularity was nonexistent. In other words, nobody liked her.</td>
+            <td class="inter">Some cases</td>
+          </tr>
+          <tr>
+            <td class="type">Summative Conclusions<span>Concluding or summarizing</span></td>
+            <td class="words">In sum, in summary</td>
+            <td class="sentence">The process requires research, planning, and revision. In summary, it takes time.</td>
+            <td class="inter">Interchangeable</td>
+          </tr>
+          <tr>
+            <td class="type">Contrasts or Concessions<span>Counterpoint or exception</span></td>
+            <td class="words">However, nevertheless, nonetheless, still, granted, that being said, admittedly, regardless</td>
+            <td class="sentence">He wanted to invest in tech stocks. However, his advisor recommended safer options.</td>
+            <td class="inter">Many cases</td>
+          </tr>
+          <tr>
+            <td class="type">Alternatives or Options<span>Different perspective or choice</span></td>
+            <td class="words">On the other hand, in contrast, by contrast, conversely, alternatively, instead</td>
+            <td class="sentence">The company could expand its workforce. On the other hand, it could train existing employees.</td>
+            <td class="inter">Specific use</td>
+          </tr>
+          <tr>
+            <td class="type">Sequence or Order<span>Order or progression</span></td>
+            <td class="words">First, next, then, subsequently, finally, ultimately, secondly</td>
+            <td class="sentence">First, preheat the oven. Next, mix the ingredients.</td>
+            <td class="inter">Specific step</td>
+          </tr>
+          <tr>
+            <td class="type">Cause and Effect - Direct Result<span>Explaining an outcome</span></td>
+            <td class="words">As a result, consequently, therefore, thus, hence</td>
+            <td class="sentence">The team missed the deadline. As a result, they had to work overtime.</td>
+            <td class="inter">Many cases</td>
+          </tr>
+          <tr>
+            <td class="type">Cause and Effect - Purpose<span>Goal-oriented reason</span></td>
+            <td class="words">For this reason, accordingly, to that end</td>
+            <td class="sentence">The project required more resources. For this reason, the team requested funding.</td>
+            <td class="inter">Many cases</td>
+          </tr>
+          <tr>
+            <td class="type">Emphasis or Intensification<span>Highlighting importance</span></td>
+            <td class="words">In fact, indeed</td>
+            <td class="sentence">Her work has been groundbreaking. In fact, she recently won an award.</td>
+            <td class="inter">Many cases</td>
+          </tr>
+          <tr>
+            <td class="type">Time References<span>Timing or temporal shifts</span></td>
+            <td class="words">Earlier, previously, meanwhile, today, currently, later, nowadays</td>
+            <td class="sentence">The company struggled last year. Today, it has expanded its workforce.</td>
+            <td class="inter">Specific time</td>
+          </tr>
+          <tr>
+            <td class="type">Context-Based Transitions<span>Flexible based on sentence context</span></td>
+            <td class="words">Actually, elsewhere, in many cases, in reality, in turn, fittingly</td>
+            <td class="sentence">The policy may be challenging to implement. Actually, it requires extensive training.</td>
+            <td class="inter">Flexible use</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="section-title">Practice Example</h2>
+    <section class="paper">
+      <h3>Example</h3>
+      <p>Some researchers argue that urban gardens mainly improve neighborhood appearance. <span class="blank"></span>, recent studies suggest that these gardens can also reduce local temperatures and improve access to fresh food.</p>
+      <p class="question"><b>Question:</b> Which choice completes the text with the most logical transition?</p>
+      <div class="answer-list">
+        <div class="answer">A. Therefore,</div>
+        <div class="answer correct"><span class="circle-letter">B</span><span class="correct-text">However,</span></div>
+        <div class="answer">C. For example,</div>
+        <div class="answer">D. Similarly,</div>
+      </div>
+    </section>
+
+    <section class="think-box">
+      <h2>Why B works</h2>
+      <div class="think-grid">
+        <div class="think">
+          <h3>Idea before the blank</h3>
+          <p>Urban gardens improve appearance.</p>
+        </div>
+        <div class="think">
+          <h3>Idea after the blank</h3>
+          <p>Urban gardens also have practical benefits. This expands and partly shifts the first idea.</p>
+        </div>
+        <div class="think">
+          <h3>Relationship</h3>
+          <p>The second idea introduces a contrast or correction to a limited view.</p>
+        </div>
+        <div class="think">
+          <h3>Best transition</h3>
+          <p><b>However</b> fits because it signals a shift from the first claim to a broader view.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="pill-link-wrap">
+      <a class="pill-link" href="https://www.youtube.com/watch?v=xvhccF_tkIE&feature=youtu.be" target="_blank" rel="noopener">Watch SLAP Strategy <span class="play-circle" aria-hidden="true"></span></a>
+    </div>
+  </main>
+</body>
+</html>

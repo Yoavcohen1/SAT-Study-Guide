@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAT Prep Lessons</title>
+  <style>
+    :root{
+      --bg:#ffffff;
+      --ink:#111111;
+      --muted:#555555;
+      --line:#dddddd;
+      --soft:#f7f7f7;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family:Inter, Segoe UI, Arial, sans-serif;
+      line-height:1.55;
+    }
+    .landing{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:56px 24px;
+      background:#ffffff;
+    }
+    .landing-shell{
+      width:min(980px,100%);
+    }
+    .landing-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:34px 42px;
+      align-items:start;
+    }
+    .landing-group{
+      display:flex;
+      flex-direction:column;
+    }
+    .landing-group-title{
+      margin:0 0 12px;
+      padding-bottom:10px;
+      border-bottom:1px solid var(--line);
+      font-size:1.05rem;
+      color:var(--ink);
+      font-weight:850;
+      letter-spacing:-.015em;
+    }
+    .landing-options{
+      display:flex;
+      flex-direction:column;
+      gap:0;
+    }
+    .landing-choice{
+      width:100%;
+      border:0;
+      border-bottom:1px solid #eeeeee;
+      background:transparent;
+      color:var(--ink);
+      border-radius:0;
+      padding:12px 2px;
+      font-family:inherit;
+      font-size:1rem;
+      font-weight:650;
+      cursor:pointer;
+      text-align:left;
+    }
+    .landing-choice:hover{
+      background:var(--soft);
+      padding-left:10px;
+    }
+    .landing-choice:focus-visible{
+      outline:2px solid #111111;
+      outline-offset:2px;
+    }
+    @media (max-width:760px){
+      .landing-grid{grid-template-columns:1fr}
+      .landing{padding:36px 18px}
+    }
+  </style>
+</head>
+<body>
+  <section class="landing" aria-label="Choose a lesson">
+    <div class="landing-shell">
+      <div class="landing-grid">
+        <div class="landing-group">
+          <h2 class="landing-group-title">Craft and Structure</h2>
+          <div class="landing-options">
+            <button class="landing-choice" type="button">Cross-Text Connections</button>
+            <button class="landing-choice" type="button">Text Structure and Purpose</button>
+            <button class="landing-choice" type="button">Words in Context</button>
+          </div>
+        </div>
+
+        <div class="landing-group">
+          <h2 class="landing-group-title">Expression of Ideas</h2>
+          <div class="landing-options">
+            <button class="landing-choice" type="button">Rhetorical Synthesis</button>
+            <button class="landing-choice" type="button">Transitions</button>
+          </div>
+        </div>
+
+        <div class="landing-group">
+          <h2 class="landing-group-title">Information and Ideas</h2>
+          <div class="landing-options">
+            <button class="landing-choice" type="button">Central Ideas and Details</button>
+            <button class="landing-choice" type="button">Command of Evidence</button>
+            <button class="landing-choice" type="button">Inferences</button>
+          </div>
+        </div>
+
+        <div class="landing-group">
+          <h2 class="landing-group-title">Standard English Conventions</h2>
+          <div class="landing-options">
+            <button class="landing-choice" type="button">Boundaries</button>
+            <button class="landing-choice" type="button">Form, Structure and Sense</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
