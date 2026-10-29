@@ -1,7 +1,9 @@
 # SAT Study Guide
 
-A concise, browser-based study guide for the **Digital SAT Reading & Writing** section, featuring clear explanations, strategies, and examples.
+A personal project I created while preparing for the **Digital SAT**.
 
-Covers **Craft and Structure**, **Information and Ideas**, **Expression of Ideas**, and **Standard English Conventions**.
+Through self-study and YouTube tutorials, I collected, organized, and summarized useful strategies, tips, and tricks for the SAT Reading & Writing section.
+
+I designed and built this website to bring everything I learned into one organized, easy-to-use study resource.
 
 ### [Open the Study Guide](https://yoavcohen1.github.io/SAT-Study-Guide/)
