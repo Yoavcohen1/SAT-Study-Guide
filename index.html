@@ -543,6 +543,12 @@
 .topic-alert[aria-pressed="true"]:hover{background:#fff0f0}
 .topic-alert:focus-visible{outline:2px solid #5386d2;outline-offset:2px}
 @media(max-width:430px){.landing-option{padding-right:40px}.landing-choice{padding-left:7px;font-size:1rem}.topic-alert{flex-basis:27px;width:27px}.topic-alert svg{width:21px;height:21px}}
+/* Entire topic row is an interactive hit area; both icon controls remain independent. */
+.landing-option[data-topic]{cursor:pointer;border-radius:11px;transition:background-color .2s ease}
+.landing-option[data-topic]:hover,.landing-option[data-topic]:focus-within{background:#f0f5ff}
+.landing-option[data-topic]:active{background:#e8effd}
+.landing-option[data-topic] .landing-choice:hover,
+.landing-option[data-topic] .landing-choice:active{background:transparent}
 </style>
 </head>
 <body>
@@ -914,6 +920,15 @@
       var button = row.querySelector('.topic-alert');
       if (button) setTopicAlert(button, !!alertState[row.dataset.topic]);
     });
+    // Clicking any empty part of a topic row opens the same lesson as its title.
+    // The review exclamation and the information control keep their own behavior.
+    document.querySelectorAll('.landing-option[data-topic]').forEach(function(row) {
+      row.addEventListener('click', function(event) {
+        if (event.target.closest('.landing-choice, .topic-alert, .topic-info, .topic-tooltip')) return;
+        openTopic(row.dataset.topic);
+      });
+    });
+
     function toggleTopicAlert(event, button) {
       event.stopPropagation();
       event.preventDefault();
